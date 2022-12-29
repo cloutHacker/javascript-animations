@@ -24,13 +24,14 @@ window.addEventListener('mousemove', e => {
     mouse.x = e.x
     mouse.y = e.y
 })
-
+let wallpaper = 'EPHANTUS'
+let font = 25;
 ctx.fillStyle = "white"
-ctx.font = '25px Verdana'
-
-ctx.fillText('VIVIAN', 20, 40)
-
-const textCoordinates = ctx.getImageData(0, 0, canvas.width, canvas.height)
+ctx.font = font + 'px Verdana'
+ctx.textAlign = "start"
+let textWidth = ctx.measureText(wallpaper).width
+ctx.fillText(wallpaper, (canvas.width / 2 - textWidth / 2) / 60, 40)
+const textCoordinates = ctx.getImageData(0, 0, textWidth * 1.5, font * 5)
 
 class Particle {
     constructor(x, y) {
@@ -99,7 +100,7 @@ function init() {
             if (textCoordinates.data[(y * 4 * textCoordinates.width) + (x * 4) + 3] > 128) {
                 let positionX = x;
                 let positionY = y;
-                particleArray.push(new Particle(positionX * 10, positionY * 10))  
+                particleArray.push(new Particle(positionX * 8, positionY * 10))  
             }
         }
     }
